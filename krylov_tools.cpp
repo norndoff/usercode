@@ -1,6 +1,10 @@
+/*
+Nicholas Orndoff
+*/
+
 #include "krylov_tools.hpp"
 
-// This is where we actually compile the STB library!
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION

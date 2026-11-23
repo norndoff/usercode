@@ -1,0 +1,73 @@
+#include <iostream>
+#include "krylov_tools.hpp"
+
+int main() {
+    std::cout << "--- STARTING UNIT TESTS ---\n\n";
+
+    // 1. Test Vector Constructor and Math (Encapsulation)
+    std::cout << "Testing Vector...\n";
+    Vector v1{3.0, 4.0};
+    if (v1.size() == 2 && v1.norm() == 5.0) {
+        std::cout << "  PASS: Vector constructors and norm() work.\n";
+    } else {
+        std::cout << "  FAIL: Vector math failed.\n";
+    }
+
+    // 2. Test Image Constructors and Accessors
+    std::cout << "\nTesting Image...\n";
+    Image img(10, 10, 1);
+    img.set(5, 5, 0.8);
+    if (img.rows() == 10 && img.cols() == 10 && img.at(5, 5) == 0.8) {
+        std::cout << "  PASS: Image dimensions and at()/set() work.\n";
+    } else {
+        std::cout << "  FAIL: Image accessors failed.\n";
+    }
+
+    // 3. Test an Operator (Invert)
+    std::cout << "\nTesting Operators...\n";
+    InvertOperator inv;
+    Image inv_out = inv.apply(img);
+    // 0.8 inverted should be 0.2
+    if (inv_out.at(5, 5) > 0.19 && inv_out.at(5, 5) < 0.21 && inv.name() == "Invert") {
+        std::cout << "  PASS: InvertOperator math and name() work.\n";
+    } else {
+        std::cout << "  FAIL: InvertOperator failed.\n";
+    }
+
+    // 4. Test a Convolution Operator (Box Blur)
+    BoxBlurOperator blur(3);
+    Image blur_out = blur.apply(img);
+    // The center pixel should have spread out, so it's no longer 0.8
+    if (blur_out.at(5, 5) < 0.8) {
+        std::cout << "  PASS: BoxBlurOperator convolutions work.\n";
+    } else {
+        std::cout << "  FAIL: BoxBlurOperator failed.\n";
+    }
+
+    // 5. Test ImageSaver and ImageLoader (IO classes)
+    std::cout << "\nTesting IO Classes...\n";
+    try {
+        ImageSaver::save("unit_test_output.png", blur_out);
+        Image loaded_img = ImageLoader::load("unit_test_output.png");
+        if (loaded_img.rows() == 10 && loaded_img.cols() == 10) {
+            std::cout << "  PASS: ImageSaver and ImageLoader work.\n";
+        } else {
+            std::cout << "  FAIL: Loaded image dimensions are wrong.\n";
+        }
+    } catch (const std::exception& e) {
+        std::cout << "  FAIL: IO Exception: " << e.what() << "\n";
+    }
+
+    // 6. Test AsciiPreview
+    std::cout << "\nTesting AsciiPreview...\n";
+    AsciiPreview preview(10);
+    std::string output = preview.render(img);
+    if (output.length() > 0) {
+        std::cout << "  PASS: AsciiPreview generates output.\n";
+    } else {
+        std::cout << "  FAIL: AsciiPreview returned empty string.\n";
+    }
+
+    std::cout << "\n--- ALL TESTS COMPLETE ---\n";
+    return 0;
+}
