@@ -1,3 +1,16 @@
+/* 
+ * Name: Nicholas Orndoff
+ * File: krylov_tools.hpp
+ * 
+ * Summary: 
+ * This header file declares the Object-Oriented architecture for my image processing application.
+ * It defines the custom Vector and Image classes for encapsulating pixel data. It also defines 
+ * an abstract base class (ImageOperator) and a hierarchy of 12 derived classes (ConvolutionOperator, 
+ * GaussianBlurOperator, InvertOperator, etc.) to represent various image filters using polymorphism. 
+ * Finally, it includes UI classes (Menu, ImageEditorApp, AsciiPreview) and IO classes (ImageLoader, 
+ * ImageSaver) to manage user interactions and file handling.
+ */
+
 #ifndef KRYLOV_TOOLS_HPP
 #define KRYLOV_TOOLS_HPP
 
@@ -15,11 +28,11 @@
 #include <utility>
 #include <vector>
 
-// Only include the headers here. We do NOT define STB_IMAGE_IMPLEMENTATION here.
+// 3rd party image libraries
 #include "stb_image.h"
 #include "stb_image_write.h"
 
-// ======================= Vector =======================
+// Vector
 class Vector {
     std::vector<double> d_;
 public:
@@ -43,7 +56,7 @@ public:
     double norm() const;
 };
 
-// ======================= Rng =======================
+// Rng 
 class Rng {
     std::mt19937_64 g_;
 public:
@@ -52,7 +65,7 @@ public:
     double normal();
 };
 
-// ======================= Image =======================
+// Image 
 class Image {
     int m_ = 0, n_ = 0, ch_ = 1;
     Vector px_;
@@ -79,7 +92,7 @@ public:
     double mean_value() const;
 };
 
-// ======================= Operators =======================
+//  Operators 
 class ImageOperator {
 public:
     virtual ~ImageOperator() = default;
@@ -189,7 +202,7 @@ public:
     std::string name() const override;
 };
 
-// ======================= IO and App =======================
+//  IO and App 
 class ImageLoader {
 public:
     static Image load(const std::string& filename);
@@ -240,4 +253,4 @@ private:
     void undo();
 };
 
-#endif // KRYLOV_TOOLS_HPP
+#endif 
