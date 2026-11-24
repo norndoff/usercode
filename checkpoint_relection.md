@@ -30,3 +30,13 @@
         same thing
 
 
+---
+
+## checkpoint-04: program structure integration and input validation
+
+1. What challenges did you encounter?
+        I did not encounter much of a challenge with this, I just had to adjust some of the things I did to meet the requirements for this checkpoint.
+2. What design decisions or changes did you make?
+        I implemented the user interface and input validation as stand-alone procedural functions. To maintain my original software architecture, i wrote procedural wrapper functions that instantiate my objects and apply them to the object passed by reference.
+        
+

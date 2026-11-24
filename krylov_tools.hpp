@@ -253,4 +253,11 @@ private:
     void undo();
 };
 
+void printMenu();
+int getUserMenuOption();
+int validateMenuOption(int option, int min, int max);
+void runInvert(Image& img);
+void runGaussianBlur(Image& img);
+void runSharpen(Image& img);
+
 #endif 

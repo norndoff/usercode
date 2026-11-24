@@ -503,3 +503,53 @@ void ImageEditorApp::undo() {
     std::cout << "Undid: " << history_.back().first << "\n";
     history_.pop_back();
 }
+
+void printMenu() {
+    std::cout << "\n=== Image Editor Main Menu ===\n";
+    std::cout << "1. Invert Image\n";
+    std::cout << "2. Gaussian Blur\n";
+    std::cout << "3. Sharpen Image\n";
+    std::cout << "4. Exit Program\n";
+    std::cout << "==============================\n";
+}
+int getUserMenuOption() {
+    int option;
+    std::cout << "Enter choice (1-4): ";
+    if (!(std::cin >> option)) {
+     
+        std::cin.clear(); 
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+        return -1; 
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    return option;
+}
+
+int validateMenuOption(int option, int min, int max) {
+    if (option >= min && option <= max) {
+        return option;
+    }
+    return -1; // Invalid
+}
+
+
+void runInvert(Image& img) {
+    InvertOperator op;
+    img = op.apply(img);
+    img.clamp(0.0, 1.0);
+    std::cout << "[Operation Applied]: " << op.name() << "\n";
+}
+
+void runGaussianBlur(Image& img) {
+    GaussianBlurOperator op(5, 1.5);
+    img = op.apply(img);
+    img.clamp(0.0, 1.0);
+    std::cout << "[Operation Applied]: " << op.name() << "\n";
+}
+
+void runSharpen(Image& img) {
+    SharpenOperator op;
+    img = op.apply(img);
+    img.clamp(0.0, 1.0);
+    std::cout << "[Operation Applied]: " << op.name() << "\n";
+}
