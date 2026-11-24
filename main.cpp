@@ -7,6 +7,22 @@ Includes validation to prevent operations on unloaded images and handles
 missing file exceptions gracefully.
 */
 
+/*
+if you want to run full program 
+
+int main() {
+    try {
+        ImageEditorApp app;
+        app.run();
+    } catch (const std::exception& e) {
+        std::cerr << "Fatal Error: " << e.what() << "\n";
+        return 1;
+    }
+    return 0;
+}
+
+*/
+
 #include <iostream>
 #include <string>
 #include "krylov_tools.hpp"
