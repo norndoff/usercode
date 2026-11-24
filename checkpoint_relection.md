@@ -38,5 +38,19 @@
         I did not encounter much of a challenge with this, I just had to adjust some of the things I did to meet the requirements for this checkpoint.
 2. What design decisions or changes did you make?
         I implemented the user interface and input validation as stand-alone procedural functions. To maintain my original software architecture, i wrote procedural wrapper functions that instantiate my objects and apply them to the object passed by reference.
+
+
+---
+
+## checkpoint-06: file io / data persistence
+
+1. What challenges did you encounter?
+        The biggest issue I found with this whole project was implementing the Image saving. I used the same stb_image libraries that we used in my linear algebra class, but it still posed challenging for me.
+2. What design decisions or changes did you make?
+        I chose to use my ImageLoader::load function to check for if a user attempts to load a fil that does not exist, and throws a runtime error back. In the main.cpp, the load operation is wrapped in a try/catch block so if the file is missing, the catch block can keep the program running without crashing.
+
         
+
+
+
 

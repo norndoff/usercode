@@ -506,12 +506,15 @@ void ImageEditorApp::undo() {
 
 void printMenu() {
     std::cout << "\n=== Image Editor Main Menu ===\n";
-    std::cout << "1. Invert Image\n";
-    std::cout << "2. Gaussian Blur\n";
-    std::cout << "3. Sharpen Image\n";
-    std::cout << "4. Exit Program\n";
+    std::cout << "1. Load Image (File IO)\n";     // NEW
+    std::cout << "2. Save Image (File IO)\n";     // NEW
+    std::cout << "3. Invert Image\n";
+    std::cout << "4. Gaussian Blur\n";
+    std::cout << "5. Sharpen Image\n";
+    std::cout << "6. Exit Program\n";
     std::cout << "==============================\n";
 }
+
 int getUserMenuOption() {
     int option;
     std::cout << "Enter choice (1-4): ";
